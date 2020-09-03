@@ -1,12 +1,7 @@
 import React from 'react';
+import { isPrimitive, isArray } from '../utils/common';
 
 const CodeView = ({ data }) => {
-
-  const isPrimitive = (value) => {
-    return typeof (value) === 'string'
-      || typeof (value) === 'number'
-      || typeof (value) === 'boolean'
-  }
 
   const renderArray = (array) => <React.Fragment>
     <span>[</span>
@@ -21,8 +16,6 @@ const CodeView = ({ data }) => {
     </ul>
     <span>]</span>
   </React.Fragment>
-
-  const isArray = (value) => Array.isArray(value)
 
   const renderPrimitiveValue = (value) => {
     const type = typeof value;

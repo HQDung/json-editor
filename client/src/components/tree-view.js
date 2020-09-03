@@ -1,14 +1,10 @@
 import React from 'react';
+import { isPrimitive, isArray } from '../utils/common';
 import ContentEditable from './content-editable';
 import TreeViewChildNode from './tree-view-child-node';
+import BooleanView from './boolean-view';
 
 const TreeView = ({ data, onChange, onSubmit }) => {
-
-  const isPrimitive = (value) => {
-    return typeof (value) === 'string'
-      || typeof (value) === 'number'
-      || typeof (value) === 'boolean'
-  }
 
   const renderArray = (array) => <React.Fragment>
     <span>[{array.length}]</span>
@@ -23,14 +19,12 @@ const TreeView = ({ data, onChange, onSubmit }) => {
     </div>
   </React.Fragment>
 
-  const isArray = (value) => Array.isArray(value)
-
   const renderPrimitiveValue = (key, value) => {
     if (value === null) return 'null';
     const type = typeof (value);
     switch (type) {
       case 'boolean':
-        return <ContentEditable html={value.toString()} onChange={onChange} />;
+        return <BooleanView value={value} onChange={onChange} />;
       default:
         return <ContentEditable html={value} onChange={onChange} />;
     }

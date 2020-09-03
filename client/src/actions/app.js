@@ -3,7 +3,7 @@ import {
   SUBMIT_DATA_REQUEST,
   SUBMIT_DATA_SUCCESS,
   SUBMIT_DATA_FAILED,
-} from '../commons/action-type';
+} from './action-type';
 
 
 export const submitData = data => dispatch => {
