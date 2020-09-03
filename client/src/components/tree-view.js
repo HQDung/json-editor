@@ -20,13 +20,12 @@ const TreeView = ({ data, onChange, onSubmit }) => {
   </React.Fragment>
 
   const renderPrimitiveValue = (key, value) => {
-    if (value === null) return 'null';
     const type = typeof (value);
     switch (type) {
       case 'boolean':
         return <BooleanView value={value} onChange={onChange} />;
       default:
-        return <ContentEditable html={value} onChange={onChange} />;
+        return <ContentEditable value={value} onChange={onChange} />;
     }
   }
 

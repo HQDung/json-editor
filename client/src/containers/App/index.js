@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { submitData } from '../../actions/app';
 import CodeView from '../../components/code-view';
 import TreeView from '../../components/tree-view';
@@ -9,9 +9,18 @@ import './style.scss';
 function App() {
   const [jsonStr, setJsonStr] = useState('');
   const [errorMsgHidden, setErrorMsgHidden] = useState(true);
+  const [saveDataMsgHidden, setSaveDataMsgHidden] = useState(true);
   const [view, setView] = useState('code');
   const [jsonObj, setJsonObj] = useState();
   const dispatch = useDispatch();
+  const appState = useSelector(state => state.app);
+
+  useEffect(() => {
+    if(appState.data){
+      setSaveDataMsgHidden(false);
+      setTimeout(() => setSaveDataMsgHidden(true), 1000)
+    }
+  }, [appState])
 
   const onChangeJsonStr = e => {
     const string = e.target.value.trim();
@@ -65,6 +74,7 @@ function App() {
         </div>
         {view === 'code' && <CodeView data={jsonObj} />}
         {view === 'tree' && <TreeView data={jsonObj} onChange={handleDataChange} onSubmit={handleSubmit} />}
+        {!saveDataMsgHidden && <p className="success">Data saved</p>}
       </div>}
     </div>
   );
