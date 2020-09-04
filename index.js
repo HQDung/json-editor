@@ -7,9 +7,9 @@ app.post('/api/data', (req, res) => {
   res.send(req.body)
 })
 
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`listening on port ${port}`));
+app.listen(PORT, () => console.log(`listening on port ${PORT}`));
 
 app.get('/', (req, res) => {
   res.send('Hello word!!!');
